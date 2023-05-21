@@ -18,6 +18,18 @@ Aitem1::Aitem1()
 void Aitem1::BeginPlay()
 {
 	Super::BeginPlay();
+
+	int32 Avgint = Avg<int32>(1, 3);
+	UE_LOG(LogTemp, Warning, TEXT("Avg of 1 and 3: %d"), Avgint);
+
+	float AvgFloat = Avg<float>(10.5f, 20.5f);
+	UE_LOG(LogTemp, Warning, TEXT("Avg of 10.5 and 20.5: %f"), AvgFloat);
+
+}
+
+float Aitem1::TransformedSin()
+{
+	return  Amplitude * FMath::Sin(RunningTime * TimeConstant);
 }
 
 // Called every frame
@@ -26,9 +38,9 @@ void Aitem1::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 
-	float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant);
+	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant);
 
-	AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
+	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
 
 
 	// actor moviment (cm/s)
@@ -36,11 +48,14 @@ void Aitem1::Tick(float DeltaTime)
 	float RotationRate = 45.f;
 
 	// actual moviment = cm/s * s/frame= cm/frame
-	//AddActorWorldOffset(FVector(MovimentRate * DeltaTime, 0.f, 0.f));
-	//AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
+	AddActorWorldOffset(FVector(MovimentRate * DeltaTime, 0.f, 0.f));
+	AddActorWorldRotation(FRotator(0.f, TransformedSin(), 0.f));
 
 	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorForwardVector() * 100 + GetActorLocation());
 	DRAW_SPHERE_SingleFrame(GetActorLocation());
-	FVector Location = GetActorLocation();
+	/*FVector Location = GetActorLocation();*/
+
+	FVector AvgVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
+	DrawDebugLine(GetWorld(), FVector::ZeroVector, GetActorLocation(), FColor::Yellow, false, -1.f,2,5.f );
 }
 

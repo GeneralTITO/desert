@@ -12,6 +12,8 @@ Aitem1::Aitem1()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
+	RootComponent = ItemMesh;
 }
 
 // Called when the game starts or when spawned
@@ -51,11 +53,11 @@ void Aitem1::Tick(float DeltaTime)
 	AddActorWorldOffset(FVector(MovimentRate * DeltaTime, 0.f, 0.f));
 	AddActorWorldRotation(FRotator(0.f, TransformedSin(), 0.f));
 
-	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorForwardVector() * 100 + GetActorLocation());
-	DRAW_SPHERE_SingleFrame(GetActorLocation());
-	/*FVector Location = GetActorLocation();*/
+	//DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorForwardVector() * 100 + GetActorLocation());
+	//DRAW_SPHERE_SingleFrame(GetActorLocation());
+	///*FVector Location = GetActorLocation();*/
 
-	FVector AvgVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
-	DrawDebugLine(GetWorld(), FVector::ZeroVector, GetActorLocation(), FColor::Yellow, false, -1.f,2,5.f );
+	//FVector AvgVector = Avg<FVector>(GetActorLocation(), FVector::ZeroVector);
+	//DrawDebugLine(GetWorld(), FVector::ZeroVector, GetActorLocation(), FColor::Yellow, false, -1.f,2,5.f );
 }
 

@@ -50,8 +50,8 @@ void Aitem1::Tick(float DeltaTime)
 	float RotationRate = 45.f;
 
 	// actual moviment = cm/s * s/frame= cm/frame
-	AddActorWorldOffset(FVector(MovimentRate * DeltaTime, 0.f, 0.f));
-	AddActorWorldRotation(FRotator(0.f, TransformedSin(), 0.f));
+	AddActorWorldOffset(FVector(0.f, 0.f, TransformedSin()));
+	AddActorWorldRotation(FRotator(0.f, 0.f, TransformedSin()));
 
 	//DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorForwardVector() * 100 + GetActorLocation());
 	//DRAW_SPHERE_SingleFrame(GetActorLocation());

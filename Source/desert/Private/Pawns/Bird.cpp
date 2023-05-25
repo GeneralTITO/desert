@@ -89,4 +89,3 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	}
 
 }
-
